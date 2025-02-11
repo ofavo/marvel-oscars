@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-
-import { HomePage } from './home.page';
-import { HomePageRoutingModule } from './home-routing.module';
+import { IonicModule } from '@ionic/angular';
+import { ViewDetailPageRoutingModule } from './view-detail-routing.module';
+import { ViewDetailPage } from './view-detail.page';
 import { LanguageSelectorComponent } from '../components/language-selector/language-selector.component';
 
 @NgModule({
@@ -12,9 +11,9 @@ import { LanguageSelectorComponent } from '../components/language-selector/langu
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule,
+    ViewDetailPageRoutingModule,
     LanguageSelectorComponent
   ],
-  declarations: [HomePage]
+  declarations: [ViewDetailPage]
 })
-export class HomePageModule {}
+export class ViewDetailPageModule {}

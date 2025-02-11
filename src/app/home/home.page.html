@@ -1,8 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Inbox
+      {{ labels.home.title }}
     </ion-title>
+    <ion-buttons slot="end">
+      <app-language-selector></app-language-selector>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -14,14 +17,42 @@
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">
-        Inbox
+        {{ labels.home.title }}
       </ion-title>
+      <ion-buttons slot="end">
+        <app-language-selector></app-language-selector>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
-  <ion-list>
-    @for (message of getMessages(); track message) {
-      <app-message [message]="message"></app-message>
+  @if (loading) {
+    <div class="loading-spinner">
+      <ion-spinner></ion-spinner>
+      <p>{{ labels.common.loading }}</p>
+    </div>
+  }
+
+  @if (error) {
+    <ion-item color="danger">
+      <ion-label>{{ labels.home.errorLoading }}</ion-label>
+    </ion-item>
+  }
+
+  <ion-list [inset]="true" >
+    @for (character of characters; track character.id) {
+      <ion-item button (click)="selectCharacter(character)">
+        <ion-avatar slot="start">
+          <img [src]="character.thumbnail.path + '.' + character.thumbnail.extension" [alt]="character.name">
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ character.name }}</h2>
+        </ion-label>
+      </ion-item>
+    }
+    @if (characters.length === 0 && !loading) {
+      <ion-item>
+        <ion-label class="ion-text-center">{{ labels.common.noDataAvailable }}</ion-label>
+      </ion-item>
     }
   </ion-list>
 </ion-content>
